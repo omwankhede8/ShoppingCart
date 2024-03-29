@@ -36,15 +36,21 @@ const Header = () => {
               Home
             </Link>
           </li>
-          <li>
-            <Link to={"/shop"} className="hover:text-white hover:underline">
+          <span>
+            <Link
+              to={"/shop"}
+              className="hover:text-white hover:underline cursor-not-allowed"
+            >
               Shop
             </Link>
-          </li>
+          </span>
           <li>
-            <Link to={"/about"} className="hover:text-white hover:underline">
+            <span
+              to={"/about"}
+              className="hover:text-white hover:underline cursor-not-allowed"
+            >
               About
-            </Link>
+            </span>
           </li>
           <li>
             <Link to={"/cart"} className="hover:text-white hover:underline">
