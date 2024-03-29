@@ -1,40 +1,58 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { FaBars } from "react-icons/fa";
 
 const Header = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
     <div className="bg-gray-900">
-      <nav className="flex items-center justify-between h-20 max-w-6xl mx-auto">
-        <Link to={"/"} className="ml-5">
-          <h1 className="text-white font-bold text-xl sm:text-2xl md:text-3xl cursor-pointer tracking-wide">
-            Trendify
-          </h1>
+      <nav className="flex items-center justify-between max-w-6xl mx-auto py-4 px-6 lg:px-0">
+        <Link
+          to={"/"}
+          className="text-white font-bold text-xl sm:text-2xl md:text-3xl"
+        >
+          Trendify
         </Link>
-        <ul className="flex items-center space-x-6 text-gray-300 font-semibold mr-5">
-          <Link to={"/"} className="hover:text-white">
-            <li className="cursor-pointer hover:underline hover:bg-orange-300 font-bold border-2 border-transparent rounded-lg py-1 px-2">
+        <div className="flex lg:hidden">
+          <button
+            onClick={toggleMenu}
+            className="text-white focus:outline-none"
+          >
+            <FaBars />
+          </button>
+        </div>
+        <ul
+          className={`lg:flex items-center space-x-6 text-gray-300 font-semibold mt-4 lg:mt-0 ${
+            menuOpen ? "block" : "hidden"
+          }`}
+        >
+          <li>
+            <Link to={"/"} className="hover:text-white hover:underline">
               Home
-            </li>
-          </Link>
-          <Link to={"/shop"} className="hover:text-white">
-            <li className="cursor-pointer hover:underline hover:bg-orange-300 font-bold border-2 border-transparent rounded-lg py-1 px-2">
+            </Link>
+          </li>
+          <li>
+            <Link to={"/shop"} className="hover:text-white hover:underline">
               Shop
-            </li>
-          </Link>
-          <Link to={"/about"} className="hover:text-white">
-            <li className="cursor-pointer hover:underline hover:bg-orange-300 font-bold border-2 border-transparent rounded-lg py-1 px-2">
+            </Link>
+          </li>
+          <li>
+            <Link to={"/about"} className="hover:text-white hover:underline">
               About
-            </li>
-          </Link>
-          <Link to={"/cart"} className="hover:text-white">
-            <li className="cursor-pointer hover:underline hover:bg-orange-300 font-bold border-2 border-transparent rounded-lg py-1 px-2">
+            </Link>
+          </li>
+          <li>
+            <Link to={"/cart"} className="hover:text-white hover:underline">
               Cart
-            </li>
-          </Link>
-          <li className="cursor-not-allowed hover:text-white">
-            <span className="font-bold border-2 border-transparent rounded-lg py-1 px-2 opacity-50">
-              Blog
-            </span>
+            </Link>
+          </li>
+          <li>
+            <span className="text-gray-400 cursor-not-allowed">Blog</span>
           </li>
         </ul>
       </nav>

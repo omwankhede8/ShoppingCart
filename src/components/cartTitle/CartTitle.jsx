@@ -8,30 +8,27 @@ const CartTitle = ({ cartItem }) => {
   function handleRemoveFromCart() {
     dispatch(removeTocart(cartItem.id));
   }
+
   return (
-    <>
-      <div className="flex items-center p-5 justify-between border-2 border-gray-500 mt-2 mb-2 rounded-xl">
-        <div className="flex p-3">
-          <img
-            src={cartItem?.image}
-            className="h-28 rounded-lg"
-            alt={cartItem?.title}
-          />
-          <div className="ml-10 self-start space-y-5">
-            <h1 className="text-xl text-white font-bold">{cartItem?.tile}</h1>
-            <p className="text-white font-extrabold">{cartItem?.price}</p>
-          </div>
-        </div>
+    <div className="flex items-center justify-between border border-gray-300 rounded-lg p-4 mb-4 md:w-full">
+      <div className="flex items-center space-x-4">
+        <img
+          src={cartItem?.image}
+          className="h-24 w-24 object-cover rounded-lg"
+          alt={cartItem?.title}
+        />
         <div>
-          <button
-            onClick={handleRemoveFromCart}
-            className="bg-orange-600 text-white border-2 rounded-lg font-bold p-4"
-          >
-            Remove
-          </button>
+          <h1 className="text-lg font-bold text-gray-800">{cartItem?.title}</h1>
+          <p className="text-gray-600 font-semibold">${cartItem?.price}</p>
         </div>
       </div>
-    </>
+      <button
+        onClick={handleRemoveFromCart}
+        className="bg-red-600 text-white rounded-lg font-semibold px-4 py-2 md:px-6 md:py-3"
+      >
+        Remove
+      </button>
+    </div>
   );
 };
 

@@ -4,16 +4,20 @@ import ProductTitle from "../components/productTitle/ProductTitle";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   async function fetchListOfProducts() {
-    setLoading(true);
-    const res = await fetch("https://fakestoreapi.com/products");
-    const data = await res.json();
+    try {
+      const res = await fetch("https://fakestoreapi.com/products");
+      const data = await res.json();
 
-    if (data) {
+      if (data) {
+        setProducts(data);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
       setLoading(false);
-      setProducts(data);
     }
   }
 
@@ -22,26 +26,17 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <div className="min-h-screen">
       {loading ? (
-        <div className="min-h-screen w-full flex justify-center items-center">
-          <Circles
-            height={"120"}
-            width={"120"}
-            color="rgb(127,29,29)"
-            visible={true}
-          />
+        <div className="flex justify-center items-center h-full">
+          <Circles height={80} width={80} color="#4A90E2" visible={true} />
         </div>
       ) : (
-        <>
-          <div className="min-h-[100vh] grid sm:grid-cols-1 md:grid-cols-2 space-x-5 space-y-10 lg:grid-cols-3 max-w-10xl mx-auto p-3">
-            {products && products.length
-              ? products.map((productItem) => (
-                  <ProductTitle key={productItem.id} product={productItem} />
-                ))
-              : null}
-          </div>
-        </>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-screen-lg mx-auto p-6">
+          {products.map((productItem) => (
+            <ProductTitle key={productItem.id} product={productItem} />
+          ))}
+        </div>
       )}
     </div>
   );
